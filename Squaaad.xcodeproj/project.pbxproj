@@ -100,6 +100,7 @@
 				F0BDDFDB1BEB1EE00014CD20 /* Squaaad */,
 				F0BDDFDA1BEB1EE00014CD20 /* Products */,
 				F0BDDFF51BEB243B0014CD20 /* Frameworks */,
+				F0BDE01C1BEB27630014CD20 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,18 +121,8 @@
 				F0BDDFE31BEB1EE00014CD20 /* ViewController.m */,
 				F0BDDFDD1BEB1EE00014CD20 /* main.m */,
 				F0BDDFED1BEB1EE10014CD20 /* Info.plist */,
-				F0BDDFDC1BEB1EE00014CD20 /* Supporting Files */,
 			);
 			path = Squaaad;
-			sourceTree = "<group>";
-		};
-		F0BDDFDC1BEB1EE00014CD20 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F0BDDFE81BEB1EE10014CD20 /* Assets.xcassets */,
-				F0BDDFF31BEB1F500014CD20 /* Default-568h@2x.png */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F0BDDFF51BEB243B0014CD20 /* Frameworks */ = {
@@ -158,6 +149,16 @@
 				F0BDDFFC1BEB24660014CD20 /* ParseUI.framework */,
 			);
 			name = Frameworks;
+			path = Squaaad;
+			sourceTree = "<group>";
+		};
+		F0BDE01C1BEB27630014CD20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F0BDDFE81BEB1EE10014CD20 /* Assets.xcassets */,
+				F0BDDFF31BEB1F500014CD20 /* Default-568h@2x.png */,
+			);
+			name = Resources;
 			path = Squaaad;
 			sourceTree = "<group>";
 		};
@@ -371,6 +372,7 @@
 				F0BDDFF21BEB1EE10014CD20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
