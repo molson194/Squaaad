@@ -22,6 +22,8 @@ NSString * title;
 UITextField *TitleTextField;
 NSString * description;
 UITextView *descTextView;
+NSString *errorChecking= @"Empty";
+NSDate *d;
 
 
 - (void)viewDidLoad {
@@ -85,9 +87,10 @@ UITextView *descTextView;
     
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    d= sender.date;
     df.dateStyle = NSDateFormatterMediumStyle;
     label1.text = [NSString stringWithFormat:@"%@",[df stringFromDate:sender.date]];
-    
+    errorChecking= label1.text;
     label1.frame = CGRectMake(screenWidth/2, 210, screenWidth/2, 40);
     label1.backgroundColor = [UIColor blueColor];
     label1.textColor = [UIColor whiteColor];
@@ -131,10 +134,16 @@ static inline BOOL IsDis(NSString* thing) {
     return 0;
 }
 
+static inline BOOL isErr(NSString* thing) {
+    if ([thing isEqualToString:@"Empty"])
+        return 1;
+    return 0;
+}
+
 - (void)postTo{
     title = TitleTextField.text;
     description = descTextView.text;
-    if (IsEmpty(title) || IsDis(description)) {
+    if (IsEmpty(title) || IsDis(description) || isErr(errorChecking)) {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please fill in required fields" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {}];
@@ -147,6 +156,7 @@ static inline BOOL IsDis(NSString* thing) {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
         eventObject[@"Title"] = title;
         eventObject[@"Descriton"] = description;
+        eventObject[@"Date"] = d;
         [eventObject saveInBackground];
         [self goToMain];
     }
