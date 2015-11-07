@@ -61,8 +61,57 @@ UITextView *descTextView;
     [self.view addSubview:descTextView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button2 addTarget:self action:@selector(callDP) forControlEvents:UIControlEventTouchUpInside];
+    [button2 setTitle:@"Select Date" forState:UIControlStateNormal];
+    button2.backgroundColor = [UIColor blueColor];
+    button2.frame = CGRectMake(0, 210, screenWidth/2, 40);
+    [self.view addSubview:button2];
     
     
+}
+
+- (void)changeDate:(UIDatePicker *)sender {
+    NSLog(@"New Date: %@", sender.date);
+    UILabel *label1 = [[UILabel alloc] init];
+    
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.dateStyle = NSDateFormatterMediumStyle;
+    label1.text = [NSString stringWithFormat:@"%@",[df stringFromDate:sender.date]];
+    
+    label1.frame = CGRectMake(screenWidth/2, 210, screenWidth/2, 40);
+    label1.backgroundColor = [UIColor blueColor];
+    label1.textColor = [UIColor whiteColor];
+    label1.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:label1];
+    
+}
+
+- (void)removeViews:(id)object {
+    [[self.view viewWithTag:9] removeFromSuperview];
+    [[self.view viewWithTag:10] removeFromSuperview];
+    [[self.view viewWithTag:11] removeFromSuperview];
+}
+
+- (void)dismissDatePicker:(id)sender {
+    CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height, 320, 44);
+    CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height+44, 320, 216);
+    [UIView beginAnimations:@"MoveOut" context:nil];
+    [self.view viewWithTag:9].alpha = 0;
+    [self.view viewWithTag:10].frame = datePickerTargetFrame;
+    [self.view viewWithTag:11].frame = toolbarTargetFrame;
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(removeViews:)];
+    [UIView commitAnimations];
 }
 
 - (void)goToMain{
@@ -131,6 +180,45 @@ static inline BOOL IsDis(NSString* thing) {
         descTextView.text = @"Description";
         [descTextView resignFirstResponder];
     }
+}
+
+- (void)callDP{
+    if ([self.view viewWithTag:9]) {
+        return;
+    }
+    CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
+    CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
+    
+    UIView *darkView = [[UIView alloc] initWithFrame:self.view.bounds];
+    darkView.alpha = 0;
+    darkView.backgroundColor = [UIColor whiteColor];
+    darkView.tag = 9;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissDatePicker:)] ;
+    [darkView addGestureRecognizer:tapGesture];
+    [self.view addSubview:darkView];
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
+    datePicker.tag = 10;
+    [datePicker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:datePicker];
+    
+    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
+    toolBar.tag = 11;
+    toolBar.barStyle = UIBarStyleBlackTranslucent;
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
+    [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
+    [self.view addSubview:toolBar];
+    
+    [UIView beginAnimations:@"MoveIn" context:nil];
+    toolBar.frame = toolbarTargetFrame;
+    datePicker.frame = datePickerTargetFrame;
+    darkView.alpha = 0.5;
+    [UIView commitAnimations];
+    
+    
+    
+    
 }
 
 
