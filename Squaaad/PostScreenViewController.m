@@ -7,6 +7,8 @@
 //
 
 #import "PostScreenViewController.h"
+#import "MainFeedViewController.h"
+#import "PostScreenViewController.h"
 
 @interface PostScreenViewController ()
 
@@ -29,6 +31,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)goToMain{
+    UINavigationController *postScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[MainFeedViewController alloc] init]];
+    [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
 /*
