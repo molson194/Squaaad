@@ -8,6 +8,7 @@
 
 #import <Parse/Parse.h>
 #import "MainFeedViewController.h"
+#import "PostScreenViewController.h"
 
 @interface MainFeedViewController ()
 
@@ -31,6 +32,16 @@
     button2.backgroundColor = [UIColor blueColor];
     button2.frame = CGRectMake(80, 260, 160, 40);
     [self.view addSubview:button2];
+    
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
+            action:@selector(open_PostScreen)];
+                                    
+}
+- (void)open_PostScreen{
+    UINavigationController *postScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[PostScreenViewController alloc] init]];
+    [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
