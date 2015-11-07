@@ -21,7 +21,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(aMethod) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"Button" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor blueColor];
+    button.backgroundColor = [UIColor redColor];
     button.frame = CGRectMake(80, 210, 160, 40);
     [self.view addSubview:button];
 }
