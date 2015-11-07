@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A33819AD1BEEAE3200EC6914 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33819AC1BEEAE3200EC6914 /* MapKit.framework */; };
+		A33819B01BEEB0E400EC6914 /* MapScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33819AF1BEEB0E400EC6914 /* MapScreenViewController.m */; };
 		F01C542F1BEE7C8F003582A5 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01C542D1BEE7C05003582A5 /* FBSDKLoginKit.framework */; };
 		F01C54301BEE7C93003582A5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01C542B1BEE7B81003582A5 /* FBSDKCoreKit.framework */; };
 		F01C54331BEE7FEA003582A5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F01C54321BEE7FEA003582A5 /* LoginViewController.m */; };
@@ -37,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A33819AC1BEEAE3200EC6914 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A33819AE1BEEB0E400EC6914 /* MapScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScreenViewController.h; sourceTree = "<group>"; };
+		A33819AF1BEEB0E400EC6914 /* MapScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScreenViewController.m; sourceTree = "<group>"; };
 		F01C542B1BEE7B81003582A5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		F01C542D1BEE7C05003582A5 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		F01C54311BEE7FEA003582A5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -77,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33819AD1BEEAE3200EC6914 /* MapKit.framework in Frameworks */,
 				F0BDE01B1BEB24F90014CD20 /* Social.framework in Frameworks */,
 				F0BDE0191BEB24F40014CD20 /* Accounts.framework in Frameworks */,
 				F0BDE0171BEB24E90014CD20 /* libsqlite3.tbd in Frameworks */,
@@ -134,6 +140,8 @@
 				F0BDDFED1BEB1EE10014CD20 /* Info.plist */,
 				F01C54371BEEA31F003582A5 /* PostScreenViewController.h */,
 				F01C54381BEEA31F003582A5 /* PostScreenViewController.m */,
+				A33819AE1BEEB0E400EC6914 /* MapScreenViewController.h */,
+				A33819AF1BEEB0E400EC6914 /* MapScreenViewController.m */,
 			);
 			path = Squaaad;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 		F0BDDFF51BEB243B0014CD20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A33819AC1BEEAE3200EC6914 /* MapKit.framework */,
 				F0BDE01A1BEB24F90014CD20 /* Social.framework */,
 				F0BDE0181BEB24F40014CD20 /* Accounts.framework */,
 				F0BDE0161BEB24E90014CD20 /* libsqlite3.tbd */,
@@ -208,6 +217,11 @@
 					F0BDDFD81BEB1EE00014CD20 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = TH5V2K4K28;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -251,6 +265,7 @@
 				F0BDDFE41BEB1EE00014CD20 /* MainFeedViewController.m in Sources */,
 				F0BDDFE11BEB1EE00014CD20 /* AppDelegate.m in Sources */,
 				F0BDDFDE1BEB1EE00014CD20 /* main.m in Sources */,
+				A33819B01BEEB0E400EC6914 /* MapScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

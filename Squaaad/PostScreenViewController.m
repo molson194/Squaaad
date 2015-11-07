@@ -11,6 +11,7 @@
 #import "PostScreenViewController.h"
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
+#import "MapScreenViewController.h"
 
 @interface PostScreenViewController ()
 
@@ -71,6 +72,13 @@ UITextView *descTextView;
     button2.backgroundColor = [UIColor blueColor];
     button2.frame = CGRectMake(0, 210, screenWidth/2, 40);
     [self.view addSubview:button2];
+    
+    UIButton *locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [locationButton addTarget:self action:@selector(mapMethod) forControlEvents:UIControlEventTouchUpInside];
+    [locationButton setTitle:@"Location" forState:UIControlStateNormal];
+    locationButton.backgroundColor = [UIColor redColor];
+    locationButton.frame = CGRectMake(80, 300, 160, 40);
+    [self.view addSubview:locationButton];
     
     
 }
@@ -216,11 +224,12 @@ static inline BOOL IsDis(NSString* thing) {
     darkView.alpha = 0.5;
     [UIView commitAnimations];
     
-    
-    
-    
 }
 
+- (void)mapMethod {
+    UINavigationController *mapScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[MapScreenViewController alloc] init]];
+    [self presentViewController:(mapScreenNavigation) animated:NO completion:nil];
+}
 
 
 /*
