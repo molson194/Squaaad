@@ -16,7 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
+            action:@selector(postTo)];
+}
+
+- (void)postTo {
+
 }
 
 - (void)didReceiveMemoryWarning {
