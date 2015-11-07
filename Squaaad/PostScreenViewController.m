@@ -22,6 +22,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
             action:@selector(post)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
+                                              action:@selector(goToMain)];
 }
 
 - (void)post {
