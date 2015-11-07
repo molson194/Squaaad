@@ -17,23 +17,63 @@
 
 @implementation PostScreenViewController
 
+NSString * title;
+UITextField *TitleTextField;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
-            action:@selector(postTo)];
+                                              action:@selector(postTo)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
                                               action:@selector(goToMain)];
+    
+    CGRect titleTextFieldFrame = CGRectMake(20.0f, 100.0f, 280.0f, 31.0f);
+    TitleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
+    TitleTextField.placeholder = @"Title";
+    TitleTextField.backgroundColor = [UIColor whiteColor];
+    TitleTextField.textColor = [UIColor blackColor];
+    TitleTextField.font = [UIFont systemFontOfSize:14.0f];
+    TitleTextField.borderStyle = UITextBorderStyleRoundedRect;
+    TitleTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    TitleTextField.returnKeyType = UIReturnKeyDone;
+    TitleTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    TitleTextField.tag = 2;
+    TitleTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self.view addSubview:TitleTextField];
+    
+    
+    
+    }
+
+- (void)goToMain{
+    UINavigationController *postScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[MainFeedViewController alloc] init]];
+    [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
-- (void)postTo {
-    PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
-    eventObject[@"Title"] = @"Title";
-    eventObject[@"Descriton"] = @"This will be a sentence";
-    [eventObject saveInBackground];
+static inline BOOL IsEmpty(NSString* thing) {
+    if ([thing length]==0)
+        return 1;
+    return 0;
+}
+
+- (void)postTo{
+    title = TitleTextField.text;
+    NSLog(@"Info: %@", title);
+    if (IsEmpty(title)) {
+        NSLog(@"Error");
+    } else {
+        PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
+        eventObject[@"Title"] = title;
+        eventObject[@"Descriton"] = @"This will be a sentence";
+        [eventObject saveInBackground];
+        [self goToMain];
+    }
+   
 
 }
 
@@ -42,10 +82,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)goToMain{
-    UINavigationController *postScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[MainFeedViewController alloc] init]];
-    [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
-}
+
 
 /*
 #pragma mark - Navigation
