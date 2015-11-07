@@ -21,11 +21,11 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
-            action:@selector(postTo)];
+            action:@selector(post)];
 }
 
-- (void)postTo {
-
+- (void)post {
+    
 }
 
 - (void)didReceiveMemoryWarning {
