@@ -32,12 +32,12 @@ UITextField *TitleTextField;
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
                                               action:@selector(goToMain)];
     
-    CGRect titleTextFieldFrame = CGRectMake(20.0f, 100.0f, 280.0f, 31.0f);
+    CGRect titleTextFieldFrame = CGRectMake(20.0f, 70.0f, 275.0f, 50.0f);
     TitleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
     TitleTextField.placeholder = @"Title";
     TitleTextField.backgroundColor = [UIColor whiteColor];
     TitleTextField.textColor = [UIColor blackColor];
-    TitleTextField.font = [UIFont systemFontOfSize:14.0f];
+    TitleTextField.font = [UIFont systemFontOfSize:16.0f];
     TitleTextField.borderStyle = UITextBorderStyleRoundedRect;
     TitleTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     TitleTextField.returnKeyType = UIReturnKeyDone;
@@ -65,7 +65,14 @@ static inline BOOL IsEmpty(NSString* thing) {
     title = TitleTextField.text;
     NSLog(@"Info: %@", title);
     if (IsEmpty(title)) {
-        NSLog(@"Error");
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please fill in required fields" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        
     } else {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
         eventObject[@"Title"] = title;
