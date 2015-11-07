@@ -10,6 +10,7 @@
 #import "MainFeedViewController.h"
 #import "PostScreenViewController.h"
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface PostScreenViewController ()
 
@@ -19,6 +20,8 @@
 
 NSString * title;
 UITextField *TitleTextField;
+NSString * description;
+UITextView *descTextView;
 
 
 - (void)viewDidLoad {
@@ -32,7 +35,7 @@ UITextField *TitleTextField;
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
                                               action:@selector(goToMain)];
     
-    CGRect titleTextFieldFrame = CGRectMake(20.0f, 70.0f, 275.0f, 50.0f);
+    CGRect titleTextFieldFrame = CGRectMake(20.0f, 70.0f, 280.0f, 50.0f);
     TitleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
     TitleTextField.placeholder = @"Title";
     TitleTextField.backgroundColor = [UIColor whiteColor];
@@ -45,6 +48,18 @@ UITextField *TitleTextField;
     TitleTextField.tag = 2;
     TitleTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.view addSubview:TitleTextField];
+    
+    CGRect textViewFrame = CGRectMake(20.0f, 130.0f, 280.0f, 80.0f);
+    descTextView = [[UITextView alloc] initWithFrame:textViewFrame];
+    descTextView.returnKeyType = UIReturnKeyDone;
+    descTextView.layer.borderWidth = 1.0f;
+    descTextView.layer.cornerRadius = 4.0f;
+    descTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    descTextView.text = @"Description";
+    descTextView.textColor = [UIColor lightGrayColor];
+    descTextView.delegate = self;
+    [self.view addSubview:descTextView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     
     
@@ -61,10 +76,17 @@ static inline BOOL IsEmpty(NSString* thing) {
     return 0;
 }
 
+static inline BOOL IsDis(NSString* thing) {
+    if ([thing isEqualToString:@"Description"])
+        return 1;
+    return 0;
+}
+
 - (void)postTo{
     title = TitleTextField.text;
+    description = descTextView.text;
     NSLog(@"Info: %@", title);
-    if (IsEmpty(title)) {
+    if (IsEmpty(title) || IsDis(description)) {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please fill in required fields" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {}];
@@ -76,7 +98,7 @@ static inline BOOL IsEmpty(NSString* thing) {
     } else {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
         eventObject[@"Title"] = title;
-        eventObject[@"Descriton"] = @"This will be a sentence";
+        eventObject[@"Descriton"] = description;
         [eventObject saveInBackground];
         [self goToMain];
     }
@@ -87,6 +109,29 @@ static inline BOOL IsEmpty(NSString* thing) {
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesBegan:withEvent:");
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    descTextView.text = @"";
+    descTextView.textColor = [UIColor blackColor];
+    return YES;
+}
+
+-(void) textViewDidChange:(UITextView *)textView
+{
+    
+    if(descTextView.text.length == 0){
+        descTextView.textColor = [UIColor lightGrayColor];
+        descTextView.text = @"Description";
+        [descTextView resignFirstResponder];
+    }
 }
 
 
