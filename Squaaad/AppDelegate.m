@@ -30,6 +30,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     UINavigationController *eventFeed = [[UINavigationController alloc] initWithRootViewController:[[MainFeedViewController alloc] init]];
+    
     self.window.rootViewController = eventFeed;
     return YES;
 }

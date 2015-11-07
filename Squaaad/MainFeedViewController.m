@@ -40,7 +40,8 @@
                                     
 }
 - (void)open_PostScreen{
-    [self presentViewController:([[PostScreenViewController alloc] init]) animated:NO completion:nil];
+    UINavigationController *postScreenNavigation = [[UINavigationController alloc] initWithRootViewController:[[PostScreenViewController alloc] init]];
+    [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
