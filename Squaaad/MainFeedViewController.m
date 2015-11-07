@@ -29,7 +29,6 @@
     self = [super initWithStyle:style];
     if(self){
         self.parseClassName = @"eventObject";
-        
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
         self.objectsPerPage = 10;
@@ -47,7 +46,7 @@
         cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.title.text = [object objectForKey:@"Title"];
-    cell.description.text = [object objectForKey:@"Description"];
+    cell.description.text = @"2";//[object objectForKey:@"Descriton"];
     return cell;
 }
 

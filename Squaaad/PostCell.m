@@ -9,6 +9,7 @@
 #import "PostCell.h"
 
 @implementation PostCell
+
 @synthesize description;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
