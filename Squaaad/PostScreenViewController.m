@@ -23,7 +23,9 @@ UITextField *TitleTextField;
 NSString * description;
 UITextView *descTextView;
 NSString *errorChecking= @"Empty";
+NSString *errorChecking2= @"Empty";
 NSDate *d;
+NSDate *d2;
 
 
 - (void)viewDidLoad {
@@ -69,10 +71,17 @@ NSDate *d;
     
     UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [button2 addTarget:self action:@selector(callDP) forControlEvents:UIControlEventTouchUpInside];
-    [button2 setTitle:@"Date" forState:UIControlStateNormal];
+    [button2 setTitle:@"Start" forState:UIControlStateNormal];
     button2.backgroundColor = [UIColor blueColor];
-    button2.frame = CGRectMake(0, 240, screenWidth/4, 35);
+    button2.frame = CGRectMake(0, 230, screenWidth/4, 35);
     [self.view addSubview:button2];
+    
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button3 addTarget:self action:@selector(callDP2) forControlEvents:UIControlEventTouchUpInside];
+    [button3 setTitle:@"End" forState:UIControlStateNormal];
+    button3.backgroundColor = [UIColor redColor];
+    button3.frame = CGRectMake(0, 265, screenWidth/4, 35);
+    [self.view addSubview:button3];
     
     
 }
@@ -90,7 +99,7 @@ NSDate *d;
     df.dateStyle = NSDateFormatterMediumStyle;
     label1.text = [NSString stringWithFormat:@"%@",[df stringFromDate:sender.date]];
     errorChecking= label1.text;
-    label1.frame = CGRectMake(screenWidth/4, 240, 240, 35);
+    label1.frame = CGRectMake(screenWidth/4, 230, 240, 35);
     label1.backgroundColor = [UIColor blueColor];
     label1.textColor = [UIColor whiteColor];
     label1.textAlignment = UITextAlignmentCenter;
@@ -102,6 +111,34 @@ NSDate *d;
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSDate *date = [NSDate date];
    label1.text = [dateFormatter stringFromDate:sender.date];
+    
+}
+
+- (void)changeDate2:(UIDatePicker *)sender {
+    NSLog(@"New Date: %@", sender.date);
+    UILabel *label2 = [[UILabel alloc] init];
+    
+    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = screenBound.size;
+    CGFloat screenWidth = screenSize.width;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    d2= sender.date;
+    df.dateStyle = NSDateFormatterMediumStyle;
+    label2.text = [NSString stringWithFormat:@"%@",[df stringFromDate:sender.date]];
+    errorChecking2= label2.text;
+    label2.frame = CGRectMake(screenWidth/4, 265, 240, 35);
+    label2.backgroundColor = [UIColor redColor];
+    label2.textColor = [UIColor whiteColor];
+    label2.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:label2];
+    
+    // code to get the date and time  in a string.
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSDate *date = [NSDate date];
+    label2.text = [dateFormatter stringFromDate:sender.date];
     
 }
 
@@ -149,7 +186,7 @@ static inline BOOL isErr(NSString* thing) {
 - (void)postTo{
     title = TitleTextField.text;
     description = descTextView.text;
-    if (IsEmpty(title) || IsDis(description) || IsEmpty(description) || isErr(errorChecking)) {
+    if (IsEmpty(title) || IsDis(description) || IsEmpty(description) || isErr(errorChecking) || isErr(errorChecking2)) {
         NSString *holder=description;
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please fill in required fields" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -163,7 +200,9 @@ static inline BOOL isErr(NSString* thing) {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
         eventObject[@"Title"] = title;
         eventObject[@"Descriton"] = description;
-        eventObject[@"Date"] = d;
+        eventObject[@"Start"] = d;
+        eventObject[@"End"] = d2;
+        eventObject[@"User"] = [PFUser currentUser];
         [eventObject saveInBackground];
         [self goToMain];
     }
@@ -238,6 +277,44 @@ static inline BOOL isErr(NSString* thing) {
     
 }
 
+- (void)callDP2{
+    if ([self.view viewWithTag:9]) {
+        return;
+    }
+    CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
+    CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
+    
+    UIView *darkView = [[UIView alloc] initWithFrame:self.view.bounds];
+    darkView.alpha = 0;
+    darkView.backgroundColor = [UIColor whiteColor];
+    darkView.tag = 9;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissDatePicker:)] ;
+    [darkView addGestureRecognizer:tapGesture];
+    [self.view addSubview:darkView];
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
+    datePicker.tag = 10;
+    [datePicker addTarget:self action:@selector(changeDate2:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:datePicker];
+    
+    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
+    toolBar.tag = 11;
+    toolBar.barStyle = UIBarStyleBlackTranslucent;
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
+    [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
+    [self.view addSubview:toolBar];
+    
+    [UIView beginAnimations:@"MoveIn" context:nil];
+    toolBar.frame = toolbarTargetFrame;
+    datePicker.frame = datePickerTargetFrame;
+    darkView.alpha = 0.5;
+    [UIView commitAnimations];
+    
+    
+    
+    
+}
 
 
 /*
