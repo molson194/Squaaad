@@ -6,9 +6,10 @@
 //  Copyright © 2015 Molson. All rights reserved.
 //
 
+#import <ParseUI/ParseUI.h>
 #import <UIKit/UIKit.h>
 
-@interface MainFeedViewController : UIViewController
+@interface MainFeedViewController : PFQueryTableViewController
 
 
 @end

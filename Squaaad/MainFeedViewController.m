@@ -8,7 +8,11 @@
 
 #import <Parse/Parse.h>
 #import "MainFeedViewController.h"
+<<<<<<< HEAD
+#import "PostCell.h"
+=======
 #import "PostScreenViewController.h"
+>>>>>>> master
 
 @interface MainFeedViewController ()
 
@@ -49,6 +53,38 @@
     // Dispose of any resources that can be recreated.
 }
 
+<<<<<<< HEAD
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if(self){
+        self.parseClassName = @"eventObject";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 10;
+    }
+    return self;
+    
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(nonnull NSIndexPath *)indexPath object:(PFObject * ) object {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil) {
+        cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.title.text = [object objectForKey:@"Title"];
+    cell.description.text = @"2";//[object objectForKey:@"Descriton"];
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+@end
+=======
 - (void)aMethod {
     
     PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
@@ -63,3 +99,4 @@
 }
 
 @end
+>>>>>>> master
