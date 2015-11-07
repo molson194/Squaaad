@@ -11,6 +11,7 @@
 		F01C54301BEE7C93003582A5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01C542B1BEE7B81003582A5 /* FBSDKCoreKit.framework */; };
 		F01C54331BEE7FEA003582A5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F01C54321BEE7FEA003582A5 /* LoginViewController.m */; };
 		F01C54391BEEA31F003582A5 /* PostScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F01C54381BEEA31F003582A5 /* PostScreenViewController.m */; };
+		F084B3321BEEB01E00113BC3 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F084B3311BEEB01E00113BC3 /* PostCell.m */; };
 		F0BDDFDE1BEB1EE00014CD20 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F0BDDFDD1BEB1EE00014CD20 /* main.m */; };
 		F0BDDFE11BEB1EE00014CD20 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0BDDFE01BEB1EE00014CD20 /* AppDelegate.m */; };
 		F0BDDFE41BEB1EE00014CD20 /* MainFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0BDDFE31BEB1EE00014CD20 /* MainFeedViewController.m */; };
@@ -43,6 +44,8 @@
 		F01C54321BEE7FEA003582A5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F01C54371BEEA31F003582A5 /* PostScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostScreenViewController.h; sourceTree = "<group>"; };
 		F01C54381BEEA31F003582A5 /* PostScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostScreenViewController.m; sourceTree = "<group>"; };
+		F084B3301BEEB01E00113BC3 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		F084B3311BEEB01E00113BC3 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		F0BDDFD91BEB1EE00014CD20 /* Squaaad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squaaad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0BDDFDD1BEB1EE00014CD20 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F0BDDFDF1BEB1EE00014CD20 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				F0BDDFED1BEB1EE10014CD20 /* Info.plist */,
 				F01C54371BEEA31F003582A5 /* PostScreenViewController.h */,
 				F01C54381BEEA31F003582A5 /* PostScreenViewController.m */,
+				F084B3301BEEB01E00113BC3 /* PostCell.h */,
+				F084B3311BEEB01E00113BC3 /* PostCell.m */,
 			);
 			path = Squaaad;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				F0BDDFE41BEB1EE00014CD20 /* MainFeedViewController.m in Sources */,
 				F0BDDFE11BEB1EE00014CD20 /* AppDelegate.m in Sources */,
 				F0BDDFDE1BEB1EE00014CD20 /* main.m in Sources */,
+				F084B3321BEEB01E00113BC3 /* PostCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

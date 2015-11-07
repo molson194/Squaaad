@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "MainFeedViewController.h"
 #import "PostScreenViewController.h"
+#import "PostCell.h"
 
 @interface MainFeedViewController ()
 
@@ -16,24 +17,20 @@
 
 @implementation MainFeedViewController
 
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    // PARSE TABLE VIEW SETUP
+    if (self) {
+        self.parseClassName = @"eventObject";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 10;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(aMethod) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Button" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor redColor];
-    button.frame = CGRectMake(80, 210, 160, 40);
-    [self.view addSubview:button];
-    
-    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button2 addTarget:self action:@selector(aMethod2) forControlEvents:UIControlEventTouchUpInside];
-    [button2 setTitle:@"Button2" forState:UIControlStateNormal];
-    button2.backgroundColor = [UIColor blueColor];
-    button2.frame = CGRectMake(80, 260, 160, 40);
-    [self.view addSubview:button2];
-    
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self
                                               action:@selector(open_PostScreen)];
@@ -44,22 +41,16 @@
     [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)aMethod {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    static NSString *CellIdentifier = @"Cell";
+    PostCell *cell = (PostCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"Mike";
-    [testObject saveInBackground];
-}
-- (void)aMethod2 {
+    if (cell == nil) {
+        cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.title.text = [object objectForKey:@"Title"];
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"Matt";
-    [testObject saveInBackground];
+    return cell;
 }
 
 @end
