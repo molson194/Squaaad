@@ -9,6 +9,7 @@
 #import "PostScreenViewController.h"
 #import "MainFeedViewController.h"
 #import "PostScreenViewController.h"
+#import <Parse/Parse.h>
 
 @interface PostScreenViewController ()
 
@@ -21,15 +22,19 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self
-            action:@selector(post)];
+            action:@selector(postTo)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
                                               action:@selector(goToMain)];
 }
 
-- (void)post {
-    
+- (void)postTo {
+    PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
+    eventObject[@"Title"] = @"Title";
+    eventObject[@"Descriton"] = @"This will be a sentence";
+    [eventObject saveInBackground];
+
 }
 
 - (void)didReceiveMemoryWarning {
