@@ -69,9 +69,9 @@ NSDate *d;
     
     UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [button2 addTarget:self action:@selector(callDP) forControlEvents:UIControlEventTouchUpInside];
-    [button2 setTitle:@"Select Date" forState:UIControlStateNormal];
+    [button2 setTitle:@"Date" forState:UIControlStateNormal];
     button2.backgroundColor = [UIColor blueColor];
-    button2.frame = CGRectMake(0, 210, screenWidth/2, 40);
+    button2.frame = CGRectMake(0, 240, screenWidth/4, 35);
     [self.view addSubview:button2];
     
     
@@ -85,17 +85,23 @@ NSDate *d;
     CGSize screenSize = screenBound.size;
     CGFloat screenWidth = screenSize.width;
     
-    
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     d= sender.date;
     df.dateStyle = NSDateFormatterMediumStyle;
     label1.text = [NSString stringWithFormat:@"%@",[df stringFromDate:sender.date]];
     errorChecking= label1.text;
-    label1.frame = CGRectMake(screenWidth/2, 210, screenWidth/2, 40);
+    label1.frame = CGRectMake(screenWidth/4, 240, 240, 35);
     label1.backgroundColor = [UIColor blueColor];
     label1.textColor = [UIColor whiteColor];
     label1.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:label1];
+    
+    // code to get the date and time  in a string.
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSDate *date = [NSDate date];
+   label1.text = [dateFormatter stringFromDate:sender.date];
     
 }
 
