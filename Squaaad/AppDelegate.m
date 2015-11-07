@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainFeedViewController.h"
 
 @interface AppDelegate ()
 
@@ -29,7 +29,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [[ViewController alloc] init];
+    UINavigationController *eventFeed = [[UINavigationController alloc] initWithRootViewController:[[MainFeedViewController alloc] init]];
+    self.window.rootViewController = eventFeed;
     return YES;
 }
 

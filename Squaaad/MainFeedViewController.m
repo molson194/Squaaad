@@ -7,13 +7,13 @@
 //
 
 #import <Parse/Parse.h>
-#import "ViewController.h"
+#import "MainFeedViewController.h"
 
-@interface ViewController ()
+@interface MainFeedViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainFeedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
