@@ -143,14 +143,15 @@ static inline BOOL isErr(NSString* thing) {
 - (void)postTo{
     title = TitleTextField.text;
     description = descTextView.text;
-    if (IsEmpty(title) || IsDis(description) || isErr(errorChecking)) {
+    if (IsEmpty(title) || IsDis(description) || IsEmpty(description) || isErr(errorChecking)) {
+        NSString *holder=description;
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please fill in required fields" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {}];
         
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
-        
+        descTextView.text = holder;
         
     } else {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
