@@ -25,10 +25,6 @@
     [Parse setApplicationId:@"ReW1u28NMNWhX09YCBbz8q90elYRrrFTmrw3fAjl"
                   clientKey:@"tlP8LJ13zlPwq5jQREWZfTiGF4ovMMLD0vaQsU57"];
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
-    
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     

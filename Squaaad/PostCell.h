@@ -12,6 +12,6 @@
 @interface PostCell : PFTableViewCell
 
 @property(nonatomic, strong) UILabel *title;
-@property(nonatomic, strong) UILabel *description;
+@property(nonatomic, strong) UILabel *desc;
 
 @end

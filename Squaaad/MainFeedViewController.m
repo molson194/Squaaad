@@ -49,8 +49,13 @@
         cell = [[PostCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.title.text = [object objectForKey:@"Title"];
+    cell.desc.text = [object objectForKey:@"Descriton"];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 @end
