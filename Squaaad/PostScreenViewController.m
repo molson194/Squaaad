@@ -226,7 +226,7 @@ static inline BOOL isErr(NSString* thing) {
         eventObject[@"Start"] = d;
         eventObject[@"End"] = d2;
         eventObject[@"User"] = [PFUser currentUser];
-        if (![self.geoPoint isEqual:nil]) {
+        if (self.geoPoint) {
             eventObject[@"Location"] = self.geoPoint;
         } else {
             eventObject[@"Location"] = [PFGeoPoint geoPointWithLatitude:0 longitude:0];
