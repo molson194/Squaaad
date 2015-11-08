@@ -50,7 +50,23 @@
     }
     cell.title.text = [object objectForKey:@"Title"];
     cell.desc.text = [object objectForKey:@"Descriton"];
-    
+    NSDate *dateAndTime = [object objectForKey:@"Start"];
+    NSDate *dateAndTime2 = [object objectForKey:@"End"];
+    NSDateFormatter *formatter;
+    NSString *timeString;
+    NSString *timeString2;
+    NSString *total;
+    NSString *dateString;
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM-dd-YYYY"];
+    dateString = [formatter stringFromDate:dateAndTime];
+    [formatter setDateFormat:@"HH:mm"];
+    timeString = [formatter stringFromDate:dateAndTime];
+    timeString2 = [formatter stringFromDate:dateAndTime2];
+    timeString= [timeString stringByAppendingString:@"-"];
+    timeString= [timeString stringByAppendingString:timeString2];
+    total = [NSString stringWithFormat:@"Date: %@ Time: %@", dateString, timeString];
+    cell.time.text = total;
     return cell;
 }
 

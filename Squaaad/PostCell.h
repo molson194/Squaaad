@@ -13,5 +13,6 @@
 
 @property(nonatomic, strong) UILabel *title;
 @property(nonatomic, strong) UILabel *desc;
+@property(nonatomic, strong) UILabel *time;
 
 @end
