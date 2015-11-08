@@ -67,7 +67,21 @@
     timeString= [timeString stringByAppendingString:timeString2];
     total = [NSString stringWithFormat:@"Date: %@ Time: %@", dateString, timeString];
     cell.time.text = total;
+    [cell.rsvp addTarget:self action:@selector(newRSVP:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSMutableArray *array = [object objectForKey:@"Attending"];
+    
+    if ([array containsObject:[PFUser currentUser]]) //contains [PfUSer Current])
+    {
+        cell.rsvp.backgroundColor = [UIColor greenColor];
+        
+    }
     return cell;
+}
+
+-(void) newRSVP:(UIButton *)sender {
+    sender.backgroundColor = [UIColor greenColor];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
