@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface PostScreenViewController : UIViewController <UITextViewDelegate>
+@interface PostScreenViewController : UIViewController <UITextViewDelegate, CLLocationManagerDelegate>
 
 @end

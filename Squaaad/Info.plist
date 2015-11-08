@@ -27,6 +27,8 @@
 			</array>
 		</dict>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Enable location services</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>fbauth2</string>
