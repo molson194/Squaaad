@@ -22,6 +22,15 @@
         self.desc.textColor = [UIColor blackColor];
         self.desc.font = [self.desc.font fontWithSize:10];
         [self addSubview:self.desc];
+        
+        
+        self.time= [[UILabel alloc] initWithFrame:CGRectMake(10, 35, 200, 50)];
+        self.time.textColor = [UIColor blackColor];
+        self.time.font = [self.time.font fontWithSize:10];
+        [self addSubview:self.time];
+        
+        
+       
     }
     
     return self;

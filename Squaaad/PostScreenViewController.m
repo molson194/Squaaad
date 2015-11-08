@@ -137,7 +137,6 @@ NSDate *d2;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    NSDate *date = [NSDate date];
     label2.text = [dateFormatter stringFromDate:sender.date];
     
 }
