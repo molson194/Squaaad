@@ -29,6 +29,12 @@
         self.time.font = [self.time.font fontWithSize:10];
         [self addSubview:self.time];
         
+        self.rsvp = [[UIButton alloc] initWithFrame:CGRectMake(250, 20, 50, 25)];
+        self.rsvp.backgroundColor = [UIColor grayColor];
+        
+        [self.rsvp setTitle:@"RSVP" forState:UIControlStateNormal];
+        [self addSubview:self.rsvp];
+        
         
        
     }

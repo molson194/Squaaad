@@ -231,6 +231,9 @@ static inline BOOL isErr(NSString* thing) {
         } else {
             eventObject[@"Location"] = [PFGeoPoint geoPointWithLatitude:0 longitude:0];
         }
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        [array addObject:[PFUser currentUser]];
+        eventObject[@"Attending"] = array;
         [eventObject saveInBackground];
         [self goToMain];
     }
