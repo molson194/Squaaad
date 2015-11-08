@@ -41,6 +41,8 @@
     [self presentViewController:(postScreenNavigation) animated:NO completion:nil];
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *CellIdentifier = @"Cell";
     PostCell *cell = (PostCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -50,8 +52,23 @@
     }
     cell.title.text = [object objectForKey:@"Title"];
     cell.desc.text = [object objectForKey:@"Descriton"];
+    [cell.rsvp addTarget:self action:@selector(newRSVP:) forControlEvents:UIControlEventTouchUpInside];
+    
+     NSMutableArray *array = [object objectForKey:@"Attending"];
+    
+    if ([array containsObject:[PFUser currentUser]]) //contains [PfUSer Current])
+    {
+        cell.rsvp.backgroundColor = [UIColor greenColor];
+        
+    }//change color
+        
     
     return cell;
+}
+
+-(void) newRSVP:(UIButton *)sender {
+    sender.backgroundColor = [UIColor greenColor];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

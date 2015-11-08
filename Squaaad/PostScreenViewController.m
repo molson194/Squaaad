@@ -203,6 +203,9 @@ static inline BOOL isErr(NSString* thing) {
         eventObject[@"Start"] = d;
         eventObject[@"End"] = d2;
         eventObject[@"User"] = [PFUser currentUser];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        [array addObject:[PFUser currentUser]];
+        eventObject[@"Attending"] = array;
         [eventObject saveInBackground];
         [self goToMain];
     }

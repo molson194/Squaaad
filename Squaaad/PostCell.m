@@ -22,9 +22,18 @@
         self.desc.textColor = [UIColor blackColor];
         self.desc.font = [self.desc.font fontWithSize:10];
         [self addSubview:self.desc];
+        
+        self.rsvp = [[UIButton alloc] initWithFrame:CGRectMake(250, 20, 50, 25)];
+        self.rsvp.backgroundColor = [UIColor grayColor];
+        
+        [self.rsvp setTitle:@"RSVP" forState:UIControlStateNormal];
+        [self addSubview:self.rsvp];
     }
     
     return self;
 }
+
+
+
 
 @end
