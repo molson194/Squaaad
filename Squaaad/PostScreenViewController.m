@@ -68,7 +68,7 @@ NSDate *d2;
     [self.view addSubview:descTextView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    CGRect locationFrame = CGRectMake(20.0f, 190.0f, 280.0f, 40.0f);
+    CGRect locationFrame = CGRectMake(20.0f, 200.0f, 280.0f, 40.0f);
     locationInput = [[UITextField alloc] initWithFrame:locationFrame];
     locationInput.placeholder = @"Enter a location...";
     locationInput.backgroundColor = [UIColor whiteColor];
@@ -90,14 +90,14 @@ NSDate *d2;
     [button2 addTarget:self action:@selector(callDP) forControlEvents:UIControlEventTouchUpInside];
     [button2 setTitle:@"Start" forState:UIControlStateNormal];
     button2.backgroundColor = [UIColor blueColor];
-    button2.frame = CGRectMake(0, 230, screenWidth/4, 35);
+    button2.frame = CGRectMake(0, 250, screenWidth/4, 35);
     [self.view addSubview:button2];
     
     UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
     [button3 addTarget:self action:@selector(callDP2) forControlEvents:UIControlEventTouchUpInside];
     [button3 setTitle:@"End" forState:UIControlStateNormal];
     button3.backgroundColor = [UIColor redColor];
-    button3.frame = CGRectMake(0, 265, screenWidth/4, 35);
+    button3.frame = CGRectMake(0, 285, screenWidth/4, 35);
     [self.view addSubview:button3];
     
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
