@@ -14,6 +14,8 @@
 
 @interface PostScreenViewController ()
 
+@property (nonatomic, strong) PFGeoPoint *geoPoint;
+
 @end
 
 @implementation PostScreenViewController
@@ -21,6 +23,7 @@
 NSString * title;
 UITextField *TitleTextField;
 NSString * description;
+UITextField *locationInput;
 UITextView *descTextView;
 NSString *errorChecking= @"Empty";
 NSString *errorChecking2= @"Empty";
@@ -39,7 +42,7 @@ NSDate *d2;
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self
                                              action:@selector(goToMain)];
     
-    CGRect titleTextFieldFrame = CGRectMake(20.0f, 70.0f, 280.0f, 50.0f);
+    CGRect titleTextFieldFrame = CGRectMake(20.0f, 70.0f, 280.0f, 40.0f);
     TitleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
     TitleTextField.placeholder = @"Title";
     TitleTextField.backgroundColor = [UIColor whiteColor];
@@ -53,7 +56,7 @@ NSDate *d2;
     TitleTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.view addSubview:TitleTextField];
     
-    CGRect textViewFrame = CGRectMake(20.0f, 130.0f, 280.0f, 80.0f);
+    CGRect textViewFrame = CGRectMake(20.0f, 120.0f, 280.0f, 70.0f);
     descTextView = [[UITextView alloc] initWithFrame:textViewFrame];
     descTextView.returnKeyType = UIReturnKeyDone;
     descTextView.layer.borderWidth = 1.0f;
@@ -64,6 +67,20 @@ NSDate *d2;
     descTextView.delegate = self;
     [self.view addSubview:descTextView];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    CGRect locationFrame = CGRectMake(20.0f, 190.0f, 280.0f, 40.0f);
+    locationInput = [[UITextField alloc] initWithFrame:locationFrame];
+    locationInput.placeholder = @"Enter a location...";
+    locationInput.backgroundColor = [UIColor whiteColor];
+    locationInput.textColor = [UIColor blackColor];
+    locationInput.font = [UIFont systemFontOfSize:16.0f];
+    locationInput.borderStyle = UITextBorderStyleRoundedRect;
+    locationInput.clearButtonMode = UITextFieldViewModeWhileEditing;
+    locationInput.returnKeyType = UIReturnKeyDone;
+    locationInput.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    locationInput.tag = 2;
+    locationInput.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self.view addSubview:locationInput];
     
     CGRect screenBound = [[UIScreen mainScreen] bounds];
     CGSize screenSize = screenBound.size;
@@ -82,6 +99,12 @@ NSDate *d2;
     button3.backgroundColor = [UIColor redColor];
     button3.frame = CGRectMake(0, 265, screenWidth/4, 35);
     [self.view addSubview:button3];
+    
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        if (!error) {
+            self.geoPoint = geoPoint;
+        }
+    }];
     
     
 }
@@ -200,9 +223,11 @@ static inline BOOL isErr(NSString* thing) {
         PFObject *eventObject = [PFObject objectWithClassName:@"eventObject"];
         eventObject[@"Title"] = title;
         eventObject[@"Descriton"] = description;
+        eventObject[@"TextLocation"] = locationInput.text;
         eventObject[@"Start"] = d;
         eventObject[@"End"] = d2;
         eventObject[@"User"] = [PFUser currentUser];
+        eventObject[@"Location"] = self.geoPoint;
         [eventObject saveInBackground];
         [self goToMain];
     }
