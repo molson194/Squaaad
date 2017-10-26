@@ -22,8 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [Parse setApplicationId:@"ReW1u28NMNWhX09YCBbz8q90elYRrrFTmrw3fAjl"
-                  clientKey:@"tlP8LJ13zlPwq5jQREWZfTiGF4ovMMLD0vaQsU57"];
+    [Parse setApplicationId:@"APP_ID"
+                  clientKey:@"CLIENT_KEY"];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
